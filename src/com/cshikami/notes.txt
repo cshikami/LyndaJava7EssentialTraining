@@ -1,0 +1,16 @@
+Converting primitive variables to other types
+
+double doubleValue = 156.5;
+Double doubleObj = new Double(doubleValue);
+
+byte byteValue = doubleObj.byteValue();
+int intValue = doubleObj.intValue();
+float floatValue = doubleObj.floatValue();
+String stringValue = doubleObj.toString();
+
+primitive numeric variables default to 0.
+
+int myInt;
+System.out.println("The value of myInt is: " + myInt);
+
+prints out to console The value of myInt is: 0
