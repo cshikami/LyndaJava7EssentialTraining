@@ -14,3 +14,17 @@ int myInt;
 System.out.println("The value of myInt is: " + myInt);
 
 prints out to console The value of myInt is: 0
+
+a string is an array of characters
+
+could be a String object like "Hello!"
+or could be broken down into an array of Char values, like H e l l o !
+
+String objects are immutable
+
+String string1 = "Hello";
+String string2 = "Hello, world!"
+
+de-referencing original object, clears it in memory using garbage collection, and then create a brand new object
+w/ the new value
+

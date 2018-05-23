@@ -1,6 +1,15 @@
 package com.cshikami;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Main {
 
@@ -145,23 +154,286 @@ public class Main {
         } else {
             System.out.println("No match!");
         }
-    }
 
-    //logical operators
-    // &&  means and
-    // || means Or
-    // ?: means Ternary (short-hand for if-then)
+        //logical operators
+        // &&  means and
+        // || means Or
+        // ?: means Ternary (short-hand for if-then)
 
-    //String s = condition ? trueValue : falseValue
+        //String s = condition ? trueValue : falseValue
 
-    //Java classes define objects
+        //Java classes define objects
 
-    //an object is an instance of a class
-    //nonprimitive variables are references to objects.
-    //Objects can have multiple references
+        //an object is an instance of a class
+        //nonprimitive variables are references to objects.
+        //Objects can have multiple references
 
         //for example might have an object anObject, and you can have three different variables pointing to the same thing
         //if something changes about that object in memory, all three variables would update
 
+        char[] chars = {'H','e','l','l','o', '!'};
+        String s = new String(chars);
+        System.out.println(s);
+
+        String s3 = "Shirt size: ";
+        String s4 = "M";
+        String s5 = s3 + s4 + ", Qty: " + 4; //automatically turned into strings during the compilation process
+        System.out.println(s5);
+
+        char[] chars2 = {'H', 'e', 'l', 'l', 'o'};
+        String s6 = new String(chars2);
+        System.out.println(s6);
+
+        char[] chars3 = s6.toCharArray(); //convert string array to char array
+
+        for (char c : chars3) { //for each character in character array chars3
+            System.out.println(c); //print out each character
+        }
+
+        //converting primitives to strings
+
+        int intValue7 = 42;
+        String fromInt = Integer.toString(intValue7);
+        System.out.println(fromInt);
+
+        boolean boolValue = true;
+        String fromBool = Boolean.toString(boolValue);
+        System.out.println(fromBool);
+
+        long longValue2 = 10_000_000;
+        NumberFormat formatter = NumberFormat.getNumberInstance();
+        String formatted = formatter.format(longValue2);
+        System.out.println(formatted);
+
+        String str1 = "Hello";
+        String str2 = "World";
+        String str3 = str1 + ", " + str2; //if you're dealing with a lot of string concatenation, can cause problems
+                                          //with memory management
+        System.out.println(str3);
+
+        //instead, recommended that you use a class called StringBuilder
+
+        StringBuilder sb = new StringBuilder("Hello");
+        sb.append(", ");
+        sb.append("World");
+        sb.append("!");
+        System.out.println(sb);
+
+        //could also do it like this:
+
+        StringBuilder sb2 = new StringBuilder("Hello")
+                .append(",")
+                .append(" World")
+                .append("!");
+        System.out.println(sb2);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter value: ");
+        String input = scanner.nextLine();
+        System.out.println(input);
+
+        sb.delete(0,sb.length());
+        for (int j = 0; j < 3; j++) {
+            input = scanner.nextLine();
+            sb.append(input + "\n");
+        }
+
+        System.out.println(sb);
+
+        String str4 = "Hello";
+        String str5 = "Hello"; //compiler looked in table of existing strings and pointed this reference variable
+                                //to the original object
+                                //strings are immutable so it is safe to simply point second variable's value to first variable
+
+
+        if (str4 == str5) {
+            System.out.println("They match!");
+        } else {
+            System.out.println("They don't match");
+        }
+
+        String str6 = "hello";  //didn't find a match, so it created a new object and the entire string is lower case
+        if (str4 == str6) {
+            System.out.println("They match");
+        } else {
+            System.out.println("They don't match");
+        }
+
+        String part1 = "Hello ";
+        String part2 = "World";
+        String str7 = part1 + part2; //compiler puts String values together but does not have enough information at compile
+                                    //time to know for sure that these will match so str7 is created as another object
+
+        String str8 = "Hello World"; //str8 is a completely different object because the compiler does not know that str7
+                                    //matches str8
+
+        if (str7 == str8) {
+            System.out.println("They match");
+        } else {
+            System.out.println("They don't match");
+        }
+
+        //the right way to compare two strings, use equalsIgnoreCase to check whether two strings are the same regardless of case
+        if (str7.equals(str8)) {
+            System.out.println("They match");
+        } else {
+            System.out.println("They don't match");
+        }
+
+        Locale locale = new Locale("da","DK");
+
+        double doubleValue3 = 1_234_567.89;
+
+        //use NumberFormat to take a primitive value and display it as a String
+
+        NumberFormat numF = NumberFormat.getNumberInstance();
+        System.out.println("Number: " + numF.format(doubleValue3));
+
+        NumberFormat numF2 = NumberFormat.getNumberInstance(locale);
+        System.out.println("Number: " + numF2.format(doubleValue3));
+
+        NumberFormat curF = NumberFormat.getCurrencyInstance();
+        System.out.println("Currency: " + curF.format(doubleValue3));
+
+        NumberFormat curF2 = NumberFormat.getCurrencyInstance(locale);
+        System.out.println("Currency: " + curF2.format(doubleValue3));
+
+        NumberFormat intF = NumberFormat.getIntegerInstance(); //rounds to integer
+        System.out.println("Integer: " + intF.format(doubleValue3));
+
+        String s9 = "Welcome to California!";
+        System.out.println("Length of string: " + s9.length());
+
+        int position = s9.indexOf("California");
+        System.out.println("Position of substring: " + position);
+
+        String sub = s9.substring(11);
+        System.out.println("Position of substring: " + sub);
+
+        String s10 = "Welcome!                    ";
+        int len1 = s10.length(); //length of s10 including white spaces
+        System.out.println(len1);
+
+        String s11 = s10.trim(); //trims off white spaces
+        System.out.println(s11.length());
+
+        Date d1 = new Date();
+        System.out.println(d1);
+
+        GregorianCalendar gc = new GregorianCalendar(2009, 1, 28);
+
+        gc.add(GregorianCalendar.DATE, 1);
+        Date d2 = gc.getTime();
+        System.out.println(d2);
+
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+        System.out.println(df.format(d2));
+
+        LocalDateTime ldt = LocalDateTime.now();
+        System.out.println(ldt);
+
+        LocalDate ld = LocalDate.of(2009, 1, 28);
+        System.out.println(ld);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ISO_DATE;
+        System.out.println(dtf.format(ld));
+
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("M/d/yyyy");
+        System.out.println(dtf2.format(ld));
+
+        Scanner scanner2 = new Scanner(System.in);
+
+        System.out.println("Enter a numeric value: ");
+        double userinput2 = scanner2.nextDouble();
+
+        System.out.println("Enter a numeric value: ");
+        double userinput3 = scanner2.nextDouble();
+
+        double totalofinput = userinput2 + userinput3;
+        System.out.println(totalofinput);
+
+        /**
+         * another way to do this is to convert from String to Double using parseDouble
+         * System.out.println("Enter a numeric value: ");
+         * String input1 = sc.nextLine();
+         * double d1 = Double.parseDouble(input);
+         *
+         * System.out.println("Enter a numeric value: ");
+         * String input2 = sc.nextLine();
+         * double d2 = Double.parseDouble(input2);
+         *
+         * double result = d1 + d2;
+         *
+         * System.out.println("The answer is " + result);
+         */
+
+        String s12 = null; //String s = Null is a syntax error
+
+        System.out.println(s12);
+
+        String welcome = "Welcome!";
+        char[] chars4 = welcome.toCharArray();
+
+        try { //to get this automatically, do Code -> Surround With... -> try/catch
+
+            if (chars.length < 10) {
+                throw (new Exception("My custom message")); //throw your own exception
+            }
+            char lastChar = chars4[chars4.length-1];
+            System.out.println(lastChar);
+
+            String sub2 = welcome.substring(10);
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+//            e.printStackTrace();
+            System.out.println("Array index problem!");
+        } catch(StringIndexOutOfBoundsException e) {
+            System.out.println("String index problem!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        //programming conditional logic
+        int monthNumber = 13;
+
+        if (monthNumber >= 1 && monthNumber <= 3) {
+            System.out.println("You're in Quarter 1");
+        } else if (monthNumber >= 4 && monthNumber <= 6) {
+            System.out.println("You're in Quarter 2");
+        } else if (monthNumber >= 7 && monthNumber <= 9) {
+            System.out.println("You're in Quarter 3");
+        } else if (monthNumber >= 10 && monthNumber <= 12) {
+            System.out.println("You're in Quarter 4");
+        } else {
+            System.out.println("That's an unknown month");
+        }
+
+        Scanner sc2 = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        String sc2input = sc2.nextLine();
+        int monthNumber2 = Integer.parseInt(sc2input);
+
+        switch(monthNumber2) {
+            case 1:
+                System.out.println("The month is January");
+                break;
+            case 2:
+                System.out.println("The month is February");
+                break;
+            case 3:
+                System.out.println("The month is March");
+                break;
+            default:
+                System.out.println("You chose another month");
+        }
+
+//        for (int k = 0; k <= chars4.length - 1; k++) {
+//            System.out.println(chars4[k]);
+//        }
+
+
+
+    }
 
 }
